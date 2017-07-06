@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-model</title>
+</head>
+<body>
+<div id="example">
+  <form action="">
+    姓名：
+    <input type="text" v-model="character.name">
+    <br>
+    性别：
+    <input type="radio" id="man" value="one" v-model="character.sex">
+    <lable for="man">男</lable>
+    <input type="radio" id="male" value="two" v-model="character.sex">
+    <lable for="male">女</lable>
+    <br>
+    兴趣：
+    <input type="checkbox" id="book" value="book" v-model="character.interest">
+    <lable for="book">阅读</lable>
+    <input type="checkbox" id="swim" value="swim" v-model="character.interest">
+    <lable for="swim">游泳</lable>
+    <input type="checkbox" id="game" value="game" v-model="character.interest">
+    <lable for="game">游戏</lable>
+    <input type="checkbox" id="song" value="song" v-model="character.interest">
+    <lable for="song">唱歌</lable>
+    <br>
+    身份：
+    <select name="" id="" v-model="character.identity">
+      <option value="teacher" selected>教师</option>
+      <option value="doctor">医生</option>
+      <option value="lawyer">律师</option>
+    </select>
+  </form>
+  <hr>
+  <input type="text" v-model.lazy="msg">
+  <p>{{msg}}</p>
+  <hr>
+  <input type="text" v-model.trim="msg1">
+  <p>{{msg1}}</p>
+</div>
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  new Vue({
+    el:'#example',
+    data:{
+      character:{
+        name:'',
+        sex:'',
+        interest:[],
+        identity:'teacher'
+      },
+      msg:'我是在change事件后才改变的',
+      msg1:'看我有没有空格'
+    }
+  });
+
+
+
+  /*
+  * 1、v-model指令用来在input,select,text,checkbox,radio等表单元素上创建双向数据绑定
+  * 2、v-model指令后可以添加多个修饰符：
+  *       .number ==> 将用户的输入自动转换为number类型，如果原值的转换结果为NaN，则返回原值
+  *       .lazy ==> 默认情况下，v-model在input事件中同步输入框的数据，若要将数据改到在change事件中发生，则可以添加lazy
+  *                 v-model.lazy="msg"  vue2.0的写法
+  *       debounce ==> 设置一个最小的延时，vue2.0已废弃
+  *       .trim ==> 自动过滤用户输入的首尾空格
+  *
+  *
+  * */
+</script>
+</body>
+</html>

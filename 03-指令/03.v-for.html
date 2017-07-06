@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-for</title>
+</head>
+<body>
+<ul id="demo">
+  <li v-for="(item,index) in items">
+    {{index}}-{{parentMessage}} {{item.message}}
+  </li>
+</ul>
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  new Vue({
+    el:'#demo',
+    data:{
+      parentMessage: 'Parent',
+      items: [
+        { message: 'Foo' },
+        { message: 'Bar' }
+      ]
+    }
+  })
+</script>
+</body>
+</html>

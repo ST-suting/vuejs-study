@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-if,v-show,v-else</title>
+</head>
+<div id="vIf">
+  <p v-if="greeting">Hello</p>
+  <p v-else="greeting">Hi</p>
+  <p v-show="greeting">看到我了吗？</p>
+</div>
+
+<body>
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#vIf',
+    data: {greeting:false}
+  });
+  /*
+  * 1、如果想用v-if来达到切换多个元素的目地，可以将<template>元素当作包装元素，
+  * 在该元素上使用v-if,在最终的DOM上不会渲染该元素，v-if是将相对应的元素从DOM树上添加或移除。
+  * 2、v-show是通过布尔值隐藏或显示元素，改变display属性值，并且不支持<template>语法
+  *
+  * 比较：v-if有更高的切换消耗，v-show有更高的初始渲染消耗。
+  * 如果元素需要被频繁切换，则使用v-show，如果在运行时条件不大可能变化，则使用v-if
+  *
+  * 3、v-else必须跟着v-if或v-show，充当else功能，但一般在v-show用在组件上时，
+  * 由于指令的优先级v-else会出现问题，此时一般用另一个v-show来代替
+  * */
+</script>
+
+</body>
+</html>
