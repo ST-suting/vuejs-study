@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns: xmlns: xmlns:>
+<head>
+  <meta charset="UTF-8">
+  <title>v-on</title>
+</head>
+<body>
+<div id="demo">
+<button v-on:click="doThis">点击</button>
+<button v-on:click="alert(1111)">点击</button>
+<button @click="alert(4444)">点击</button>
+</div>
+
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  new Vue({
+    el:'#demo',
+    methods:{
+      doThis:function(){
+        alert(222);
+      }
+    }
+  });
+
+
+  /*
+  * 1、v-on用于绑绑定事件监听器
+  * 2、使用在普通元素上时，只能用于原生DOM事件，使用在自定义元素组件时，可以监听子组件触发的自定义事件
+  * 3、还有很多其他的事件参数跟修饰符，参考官方文档
+  * */
+</script>
+</body>
+</html>

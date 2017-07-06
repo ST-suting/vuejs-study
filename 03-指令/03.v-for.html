@@ -1,29 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>v-for</title>
+  <style>
+    /*用来避免用户在vue代码未完成时的状态*/
+    [v-cloak]{
+      display: none;
+    }
+  </style>
 </head>
 <body>
-<ul id="demo">
-  <li v-for="(item,index) in items">
-    {{index}}-{{parentMessage}} {{item.message}}
-  </li>
-</ul>
+<div id="demo" v-cloak>
+  <ul>
+    <li v-for="(item,index) in items" v-bind:key="item.id">
+      {{index}}-{{parentMessage}} {{item.message}}
+    </li>
+  </ul>
+  <hr>
+  <div>
+    <div v-for="n in 5">我是第 {{n}} 次循环</div>
+  </div>
+  <ul>
+    <!--<li v-for="user in users">{{user.name}}</li>-->
+  </ul>
+  <!--<p v-for="user in orderedUsers">{{ user.name }}</p>-->
+</div>
 
 
 <script src="../node_modules/vue/dist/vue.min.js"></script>
 <script>
   new Vue({
-    el:'#demo',
-    data:{
+    el: '#demo',
+    data: {
       parentMessage: 'Parent',
       items: [
-        { message: 'Foo' },
-        { message: 'Bar' }
+        {message: 'Foo', id: 1},
+        {message: 'Bar', id: 2}
+      ],
+      users: [
+        {name: '快车', tag: 1},
+        {name: '出租车', tag: 2},
+        {name: '顺风车', tag: 3},
+        {name: '专车', tag: 4}
       ]
+    },
+    computed: {
+      filteredUsers: function () {
+        var self = this;
+        return self.users.filter(function (user) {
+          return user.name.indexOf(self.searchText) !== -1
+        })
+      }
     }
-  })
+  });
+
+
+  /*
+   * 1、v-for同v-if一样，若要重复一个包含多个DOM元素的代码块，可以使用<template>元素来包装该代码块。
+   * 2、v-for支持整数
+   * 3、过滤器暂时还没搞懂
+   *
+   *
+   *
+   * */
 </script>
 </body>
 </html>

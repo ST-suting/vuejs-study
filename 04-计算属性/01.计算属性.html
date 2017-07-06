@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>计算属性</title>
+</head>
+<body>
+<div id="app">
+  <input type="text" v-model="didi">
+  <input type="text" v-model="family">
+  <br>
+  didi={{didi}},family={{family}},didiFamily={{didiFamily}}
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      didi:'didi',
+      family:'family'
+    },
+    computed:{
+      //一个计算属性的getter,默认只有getter,必要时可以设置计算属性setter
+      /*didiFamily:function(){
+        //this指向vm实例
+        return this.didi+this.family;
+      }*/
+      didiFamily:{
+        get:function(){
+          return this.didi+this.family;
+        },
+        set:function(newVal){
+          var names=newVal.split(' ');
+          this.didi=names[0];
+          this.family=names[1];
+        }
+      }
+
+
+
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind</title>
+</head>
+<body>
+<div id="demo">
+  <img v-bind:src="imgSrc" alt="">
+  <!--简写-->
+  <img :src="imgSrc">
+  <!--内联字符串拼接-->
+  <img :src="'../images/'+imgName" alt="">
+  <!--类名-->
+  <p :class="[classA,{B:isB,C:isC}]"></p>
+
+</div>
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#demo',
+    data: {
+      imgSrc:'../images/house.png',
+      imgName:'list.png',
+      classA:'A',
+      isB:true,
+      isC:false
+    }
+  })
+</script>
+</body>
+</html>

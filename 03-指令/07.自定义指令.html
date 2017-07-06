@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:v-demo1="http://www.w3.org/1999/xhtml"
+      xmlns:v-demo2="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义指令</title>
+</head>
+<body >
+
+<div id="demo" v-demo1:hello.a.b="msg"></div>
+<div id="demo2" v-demo2="{color:'red',text:'我是demo2'}"></div>
+
+<!--<div id="hook-arguments-example" v-demo:foo.a.b="message"></div>-->
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  //自定义指令
+  Vue.directive('demo1', {
+    bind: function (el,binding) {
+      console.log(el);
+      console.log(binding.vm);
+      el.innerHTML =
+          'name - ' + binding.name + '<br>' +
+          'expression - ' + binding.expression + '<br>' +
+          'argument - ' + binding.arg + '<br>' +
+          'modifiers - ' + JSON.stringify(binding.modifiers) + '<br>' +
+          'value - ' + binding.value + '<br>'
+    }
+
+  });
+  Vue.directive('demo2', function(el,binding){
+    console.log(el);
+    console.log(binding);
+    console.log(binding.value.color);
+    console.log(binding.value.text);
+    el.style.backgroundColor = binding.value.color;
+    el.innerHTML=binding.value.text;
+  });
+  new Vue({
+      el: '#demo',
+      data: {
+        msg: 'Hello'
+      }
+
+  });
+  new Vue({
+    el:'#demo2'
+  })
+</script>
+
+<!--官方文档代码-->
+<!--<script>
+  Vue.directive('demo', {
+    bind: function (el, binding, vnode) {
+      var s = JSON.stringify
+      el.innerHTML =
+          'name: '       + s(binding.name) + '<br>' +
+          'value: '      + s(binding.value) + '<br>' +
+          'expression: ' + s(binding.expression) + '<br>' +
+          'argument: '   + s(binding.arg) + '<br>' +
+          'modifiers: '  + s(binding.modifiers) + '<br>' +
+          'vnode keys: ' + Object.keys(vnode).join(', ')
+    }
+  });
+  new Vue({
+    el: '#hook-arguments-example',
+    data: {
+      message: 'hello!'
+    }
+  })
+</script>-->
+</body>
+</html>
