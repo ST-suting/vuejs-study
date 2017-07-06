@@ -5,12 +5,31 @@
   <title>计算属性缓存</title>
 </head>
 <body>
-
+<div id="demo">
+  <p>{{example}}</p>
+</div>
 
 
 <script src="../node_modules/vue/dist/vue.min.js"></script>
 <script>
+  var vm=new Vue({
+    el:'#demo',
+    data:{
+      welcome:'Welcome to join vue.js!'
+    },
+    computed:{
+      example:{
+        //关闭缓存，默认为true.
+        //vue2.0中弃用
+        cache:false,
+        get:function(){
+          return Date.now()+this.welcome;
+        }
+      }
 
+
+    }
+  })
 </script>
 </body>
 </html>

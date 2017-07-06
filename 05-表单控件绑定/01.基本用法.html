@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>基本用法</title>
+</head>
+<body>
+<div id="demo">
+  <!--text-->
+  <input type="text" v-model="msg" placeholder="suting">
+  <p> Welcome {{ msg }}</p>
+
+  <!--checkbox-->
+  <input type="checkbox" id="flash1" value="flash" v-model="bizLines">
+  <lable for="flash1">快车</lable>
+  <input type="checkbox" id="premium1" value="premium" v-model="bizLines">
+  <lable for="premium1">专车</lable>
+  <input type="checkbox" id="bus1" value="bus" v-model="bizLines">
+  <lable for="bus1">巴士</lable>
+  <p>checked lines:{{ bizLines | json }}</p>
+  <!--json过滤器，JSON.stringify()的精简版，可将表达式的值转换为JSON字符串-->
+
+  <!--radio-->
+  <input type="radio" id="flash2" value="flash" v-model="bizLine">
+  <lable for="flash2">快车</lable>
+  <input type="radio" id="premium2" value="premium" v-model="bizLine">
+  <lable for="premium2">专车</lable>
+  <input type="radio" id="bus2" value="bus" v-model="bizLine">
+  <lable for="bus2">巴士</lable>
+  <p>picked:{{ bizLine | json }}</p>
+
+  <!--select-->
+  <!--单选的情况-->
+  <select v-model="selectBizLine">
+    <option value="flash">快车</option>
+    <option value="premium">专车</option>
+    <option>巴士</option>
+  </select>
+  <p>Selecked:{{selectBizLine}}</p>
+  <!--当被选中的option有value属性时，vm.selected为对应的option的value的值，否则为对应的option的text值-->
+  <!--多选的情况-->
+  <select v-model="selectBizLines" multiple>
+    <option value="flash">快车</option>
+    <option value="premium">专车</option>
+    <option>巴士</option>
+  </select>
+  <p>Selecked:{{selectBizLines}}</p>
+  <!--数组按照option的顺序-->
+
+  <!--动态生成option-->
+  <select v-model="bizL">
+    <option v-for="option in options" v-bind:value="option.value">{{option.text}}</option>
+  </select>
+  <p>Select:{{bizL}}</p>
+
+
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  var vm = new Vue({
+    el: '#demo',
+    data: {
+      msg: '',
+      bizLines: [],
+      bizLine: '',
+      selectBizLine: '',
+      selectBizLines:[],
+      bizL:'flash',
+      options:[
+        {text:'快车',value:'flash'},
+        {text:'专车',value:'premium'},
+        {text:'巴士',value:'bus'}
+      ]
+    }
+  });
+
+
+  /*
+   * 1、需要在data内声明msg才能正常自动更新
+   *
+   * */
+</script>
+</body>
+</html>
