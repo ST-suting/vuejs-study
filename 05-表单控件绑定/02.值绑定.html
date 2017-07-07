@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>值绑定</title>
+</head>
+<body>
+<div id="demo">
+  <!--checkbox-->
+  <input type="checkbox" id="flash1" v-bind:value="flash" v-model="bizLines">
+  <lable for="flash1">{{flash.name}}</lable>
+  <input type="checkbox" id="premium1" v-bind:value="premium" v-model="bizLines">
+  <lable for="premium1">{{premium.name}}</lable>
+  <input type="checkbox" id="bus1" v-bind:value="bus" v-model="bizLines">
+  <lable for="bus1">{{bus.name}}</lable>
+  <p>checked lines:{{ bizLines | json }}</p>
+
+  <!--radio-->
+  <input type="radio" v-model="pick" v-bind:value="a">
+  <p>pick:{{pick}}</p>
+
+  <!--select-->
+  <select v-model="selected">
+    <option v-bind:value="{number:123}">123</option>
+  </select>
+  <p>selected:{{selected}}</p>
+</div>
+
+
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  var vm=new Vue({
+    el:'#demo',
+    data:{
+      flash:{name:'flash'},
+      premium:{name:'premium'},
+      bus:{name:'bus'},
+      bizLines:[],
+      a:'a',
+      pick:[],
+      selected:[]
+    }
+  });
+  /*
+  * 真正开发过程中，为避免改动html，不管数据在js中，还是由后台提供，都应动态绑定
+  * */
+</script>
+</body>
+</html>

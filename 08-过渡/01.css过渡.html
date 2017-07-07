@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>css过渡</title>
+  <style>
+    /*进入和离开的过渡过程可以分别定义*/
+    .expand-enter-active,
+    .expand-leave-active{
+      transition: all 1s;
+      background-color: #eee;
+      height: 100px;
+      overflow: hidden;
+    }
+    .expand-enter,.expand-leave-to{
+      height: 0;
+      opacity: 0;
+    }
+
+    .bounce-enter-active{
+      animation: bounce-in .5s;
+    }
+    .bounce-leave-active{
+      animation: bounce-in .5s reverse;
+    }
+
+
+    @keyframes bounce-in {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="demo">
+  <!--css过渡-->
+  <button v-on:click="show=!show">点击切换</button>
+  <transition name="expand">
+    <ul v-if="show">
+      <li v-for="li in liList">{{li}}</li>
+    </ul>
+  </transition>
+  <br>
+  <!--css动画过渡-->
+  <button v-on:click="toggle=!toggle">点我</button>
+  <transition name="bounce">
+    <p v-if="toggle">看我</p>
+  </transition>
+
+</div>
+
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  var vm=new Vue({
+    el:'#demo',
+    data:{
+      liList:['我是西瓜','我是苹果','我是香蕉','我是其他水果'],
+      show:true,
+      toggle:true
+    }
+  })
+</script>
+</body>
+</html>

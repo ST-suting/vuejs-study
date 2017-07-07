@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>绑定内联样式</title>
+</head>
+<body>
+<div id="demo">
+  <p v-bind:style="styleObj">看我的样式有没有改</p>
+  <p v-bind:style="styleExp">看我的样式有没有改</p>
+  <!--也可以是一个数组-->
+  <p v-bind:style="[styleObj,styleExp]">看我的样式有没有改</p>
+</div>
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  var vm= new Vue({
+    el: '#demo',
+    data: {
+      styleObj: {
+        border:'1px solid #333',
+        backgroundColor: 'hotpink'
+      },
+      age:4,
+      member:3000
+    },
+    //也可以结合计算属性使用
+    computed:{
+      styleExp:function(){
+        return{
+          color:this.age>3?'orange':'green',
+          fontSize:this.member>1000?'30px':'10px'
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

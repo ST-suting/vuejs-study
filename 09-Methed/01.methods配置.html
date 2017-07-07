@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>methods配置</title>
+</head>
+<body>
+<div id="demo">
+  <button v-on:click="say('Hi')">say Hi</button>
+  <button v-on:click="greet">greet</button>
+</div>
+
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  var vm=new Vue({
+    el:'#demo',
+    methods:{
+      say:function(msg){
+        alert(msg);
+      },
+      greet:function(event){
+        console.log('欢迎加入vue');
+        console.log(event.target.tagName);
+      }
+    }
+  })
+</script>
+</body>
+</html>

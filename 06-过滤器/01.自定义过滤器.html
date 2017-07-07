@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义过滤器</title>
+</head>
+<body>
+<div id="demo">
+  <p>{{msg | reverse}}</p>
+  <!--
+  <p v-text="msg | reverse"></p>
+  这种写法为提示reverse未定义
+  -->
+  <hr>
+  <p>{{msg | wrap('hello ',' !')}}</p>
+  <!--多个参数时，用圆括号括起来，并以逗号隔开-->
+  <hr>
+  <input type="text" v-model="userInput">
+  <p>{{msg | concat(userInput)}}</p>
+  <hr>
+  <p>{{msg}}</p>
+  <!--<input type="text" v-model="msg | filterExample">-->
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  //1、单个参数,注册一个reverse的过滤器，将字符串反转输出
+  Vue.filter('reverse', function (value) {
+    return value.split('').reverse().join('');
+
+  });
+  //2、多个参数
+  Vue.filter('wrap',function(value,begin,end){
+    return begin+value+end;
+  });
+
+  //3、双向过滤器
+  /*Vue.filter('filterExample',{
+    read:function(val){
+      return 'read'+val;
+    },
+    write:function(newVal,oldVal){
+      return oldVal+'write';
+    }
+  });*/
+
+  var vm = new Vue({
+    el: '#demo',
+    data: {
+      msg: 'abc',
+      userInput:''
+    },
+    //写在vue实例的内部
+    //4、动态参数
+    filters:{
+      concat:function(value,input){
+        return value+input;
+      },
+      filterExample:{
+        read:function(val){
+          return 'read'+val;
+        },
+        write:function(newVal,oldVal){
+          return oldVal+'write';
+        }
+      }
+    }
+  });
+
+/*
+* 第一个参数是过滤器的名字，第二个参数是具体的过滤器函数，该函数以值为参数，返回转换后的值
+ * 自定义过滤器应该放在vue实例的前面或者内部
+ * 注册的过滤器和之前的有冲突，那么会将之前的过滤器覆盖
+ * 过滤器的你爱我吗是输入表达式的值，经过处理后输出
+ * */
+
+</script>
+</body>
+</html>

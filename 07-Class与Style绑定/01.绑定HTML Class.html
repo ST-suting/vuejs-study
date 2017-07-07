@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>绑定HMTL Class</title>
+</head>
+<body>
+<div id="demo">
+  <p class="green" v-bind:class="exp">查看我的类名</p>
+  <p class="green" v-bind:class="com">查看我的类名</p>
+  <p class="green" v-bind:class="[exp,com]">查看我的类名</p>
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  var vm = new Vue({
+    el: '#demo',
+    data: {
+      exp: {
+        orange: true,
+        red: false
+      },
+      age: 4,
+      member: 3000
+    },
+    computed: {
+      com: function () {
+        return {
+          'black': this.age > 3 ? true : false,
+          'blue': this.member > 2000 ? true : false
+        }
+      }
+    }
+  });
+
+  /*
+   * 1、可以给v-bind:class一个对象，以动态切换class
+   * 2、v-bind:class可以与普通的class特性共存
+   * 3、v-bind:class还可以绑定一个计算属性，常用且强大
+   * 4、v-bind:class还可以添加一个数组
+   * */
+</script>
+</body>
+</html>
