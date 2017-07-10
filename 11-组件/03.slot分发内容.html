@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>slot分发内容</title>
+</head>
+<body>
+<div id="demo">
+  <div>
+    <h1>我是父组件的标题</h1>
+    <my-component>
+      <p>这是一些初始内容</p>
+      <p>这是更多的初始内容</p>
+    </my-component>
+  </div>
+  <app-layout>
+    <h1 slot="header">这里可能是一个页面标题</h1>
+    <p>主要内容的一个段落。</p>
+    <p>另一个主要段落。</p>
+    <p slot="footer">这里有一些联系信息</p>
+  </app-layout>
+</div>
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+
+
+  var vm = new Vue({
+    el: '#demo',
+    //组件
+    components: {
+      'my-component': {
+        //单个slot
+        template: '<div><h2>我是子组件的标题</h2><slot>只有在没有要分发的内容时才会显示。</slot></div>'
+      },
+      //具名slot
+      'app-layout': {
+        template: '<div>' +
+        '<header><slot name="header"></slot></header>' +
+        '<main><slot></slot></main>' +
+        '<footer><slot name="footer"></slot></footer>' +
+        '</div>'
+      }
+    }
+  })
+</script>
+</body>
+</html>

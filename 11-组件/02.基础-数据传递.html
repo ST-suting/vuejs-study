@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>基础-数据传递</title>
+</head>
+<body>
+<div id="demo">
+  <!--字面量形式-->
+  <child message="hello"></child>
+  <!--动态语法-->
+  <div>
+    <input type="text" v-model="info.aaa">
+    <child v-bind:message="info"></child>
+  </div>
+</div>
+
+
+
+<script src="../node_modules/vue/dist/vue.min.js"></script>
+<script>
+  Vue.component('child',{
+    props:['message'],
+    template:'<p>{{message.aaa}}</p>'
+  });
+
+  var vm=new Vue({
+    el:'#demo',
+    data:function(){
+      return {
+        info:{
+          aaa:'bbb'
+        }
+      }
+    }
+  });
+
+
+  /*
+  * props内如果是驼峰命名法在html结构内需要用‘-’连接
+  *
+  *
+  *
+  * */
+</script>
+</body>
+</html>

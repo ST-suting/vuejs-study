@@ -17,15 +17,18 @@
   var vm=new Vue({
     el:'#demo',
     methods:{
-      say:function(msg){
+      say:function(msg,event){
         alert(msg);
+        console.log(event);
       },
       greet:function(event){
         console.log('欢迎加入vue');
         console.log(event.target.tagName);
+        console.log(this);//methods中的this指向vue实例
+        console.log(vm === this);
       }
     }
-  })
+  });
 </script>
 </body>
 </html>
